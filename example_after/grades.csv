@@ -1,0 +1,6 @@
+Display ID,ID,Last Name,First Name,grade,Submission date,Late submission,folder_name
+a@ohsu.edu,a@ohsu.edu,A,A,50,2019-08-20T06:53:09Z,On time,"A, A(a@ohsu.edu)"
+b@ohsu.edu,b@ohsu.edu,B,B,50,2019-08-20T01:39:17Z,On time,"B, B(b@ohsu.edu)"
+c@gmail.com,c@gmail.com,C,C,70,2019-08-17T21:38:14Z,On time,"C, C(c@gmail.com)"
+d@ohsu.edu,d@ohsu.edu,D,D,88,2019-08-19T18:49:09Z,On time,"D, D(d@ohsu.edu)"
+e@ohsu.edu,e@ohsu.edu,E,E,94,2019-08-20T05:34:08Z,On time,"E, E(e@ohsu.edu)"
