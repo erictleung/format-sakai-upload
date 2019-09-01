@@ -28,7 +28,7 @@ Python 3.X and pandas
 
 In Sakai, you'll need to download a `grades.csv` file. This can be found using
 the "Download All" link when you are in a submission page about to grade the
-assignments. This grades.csv file will be put with the flat directory as seen
+assignments. This `grades.csv` file will be put with the flat directory as seen
 below.
 
 ## Example Directory Structure
