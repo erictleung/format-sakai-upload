@@ -7,6 +7,11 @@ grades.csv file. The grades file can be downloaded from Sakai from where you
 upload the files. This page should contain a link to download a template.
 Download this once so that you have a list of their names.
 
+**Contents**
+
+- [Usage](#usage)
+- [Prerequisites](#prerequisites)
+
 ## Usage
 
 ```shell
