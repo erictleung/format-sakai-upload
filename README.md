@@ -11,6 +11,8 @@ Download this once so that you have a list of their names.
 
 - [Usage](#usage)
 - [Prerequisites](#prerequisites)
+- [Example Directory Structure](#example-directory-structure)
+- [License](#license)
 
 ## Usage
 
@@ -55,3 +57,7 @@ XXX_Assignment8_BCB_96.ipynb
 
 **Note: The Python script file should be outside this directory containing the
 graded files.**
+
+## License
+
+MIT
