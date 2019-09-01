@@ -22,14 +22,16 @@ where `example_before` is the name of the directory path to search for files.
 
 ## Prerequisites
 
-Python 3.X
+Python 3.X and pandas
 
 In Sakai, you'll need to download a `grades.csv` file. This can be found using
 the "Download All" link when you are in a submission page about to grade the
 assignments. This grades.csv file will be put with the flat directory as seen
 below.
 
-Example directory structure from `tree`:
+## Example Directory Structure
+
+Example directory structure for example directory `week_8`:
 
 ```txt
 grades.csv
@@ -51,4 +53,5 @@ XXX_Assignment8_80.ipynb
 XXX_Assignment8_BCB_96.ipynb
 ```
 
-The script file should be outside this file containing the graded files.
+**Note: The Python script file should be outside this directory containing the
+graded files.**
