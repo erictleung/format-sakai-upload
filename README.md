@@ -1,11 +1,13 @@
 # Format Feedback for Sakai
 
-> Help format Python homeworks into bulk submission format
+> Help format Jupyter notebook homeworks into bulk submission format
 
-This simply takes in a directory full of homework assignments and the
-grades.csv file. The grades file can be downloaded from Sakai from where you
-upload the files. This page should contain a link to download a template.
-Download this once so that you have a list of their names.
+This simply takes in a directory full of Jupyter notebook homework assignments
+and the `grades.csv` file.
+
+The grades file can be downloaded from Sakai from where you upload the files.
+This page should contain a link to download a template.  Download this once so
+that you have a list of student names and emails.
 
 **Contents**
 
