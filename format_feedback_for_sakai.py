@@ -97,7 +97,8 @@ def read_grades(assignment_path):
         pandas DataFrame with student grade information
     '''
     try:
-        grades = pd.read_csv(assignment_path + '/grades.csv')
+        complete_grade_path = os.path.join(assignment_path, 'grades.csv')
+        grades = pd.read_csv(complete_grade_path)
     except FileNotFoundError:
         grade_error = 'Directory should contain a grades.csv file'
         raise Exception(grade_error)
@@ -124,7 +125,8 @@ def extract_and_write_comment(student_file_path, full_student_dir):
         search_for_grade_comment = r'\([0-9]{,3}\/100\) (.*)<'
         comment = re.search(search_for_grade_comment, comment_raw)
 
-        with open(full_student_dir + '/comments.txt', 'w') as com_fh:
+        comment_file_path = os.path.join(full_student_dir, 'comments.txt')
+        with open(comment_file_path, 'w') as com_fh:
             com_fh.write(comment.group(1))
 
 
@@ -156,7 +158,7 @@ def archive_for_upload(assignment_path):
     Return:
         None
     '''
-    output_filename = assignment_path + '/upload_to_sakai.zip'
+    output_filename = os.path.join(assignment_path, 'upload_to_sakai.zip')
     make_archive(assignment_path, 'zip', output_filename)
 
 
@@ -187,17 +189,19 @@ if __name__ == '__main__':
 
             # Create student submission directory for students
             student_dir = grades.loc[student_idx, 'folder_name'].values[0]
-            full_student_dir = assignment_path + '/' + student_dir
+            full_student_dir = os.path.join(assignment_path, student_dir)
             if not os.path.exists(full_student_dir):
                 os.makedirs(full_student_dir)
 
-            student_file_path = assignment_path + '/' + student_file
+            student_file_path = os.path.join(assignment_path, student_file)
             extract_and_write_comment(student_file_path, full_student_dir)
 
             # Copy feedback file into 'Feedback Attachment(s)/'
-            feedback_dir = full_student_dir + '/Feedback Attachment(s)'
+            feedback_dir = os.path.join(full_student_dir,
+                                        'Feedback Attachment(s)')
             if not os.path.exists(feedback_dir):
                 os.makedirs(feedback_dir)
             copy(student_file_path, feedback_dir)
 
-    grades.to_csv(assignment_path + '/grades.csv', sep=',', index=False)
+    grades_path = os.path.join(assignment_path, 'grades.csv')
+    grades.to_csv(grades_path, sep=',', index=False)
