@@ -14,6 +14,7 @@ that you have a list of student names and emails.
 - [Usage](#usage)
 - [Prerequisites](#prerequisites)
 - [Example Directory Structure](#example-directory-structure)
+- [Example Jupyter Notebook](#example-jupyter-notebook)
 - [License](#license)
 
 ## Usage
