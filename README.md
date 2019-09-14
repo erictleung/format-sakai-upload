@@ -58,7 +58,8 @@ XXX_Assignment8_BCB_96.ipynb
 ```
 
 **Note: The Python script file should be outside this directory containing the
-graded files.**
+graded files. It should be arranged in a similar way as to how this directory
+is arranged.**
 
 ## License
 
