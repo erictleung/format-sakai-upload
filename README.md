@@ -67,7 +67,7 @@ The Python script here opens up the Jupyter notebook with the extension `.ipynb`
 and extracts the first Markdown text block. This text block should contain the
 comments you wish to give back to a student.
 
-See [here][./example_before/a_Assignment5_50.ipynb] for an example notebook.
+See [here](./example_before/a_Assignment5_50.ipynb) for an example notebook.
 
 ## License
 
