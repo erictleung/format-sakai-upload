@@ -6,7 +6,7 @@ This simply takes in a directory full of Jupyter notebook homework assignments
 and the `grades.csv` file.
 
 The grades file can be downloaded from Sakai from where you upload the files.
-This page should contain a link to download a template.  Download this once so
+This page should contain a link to download a template. Download this once so
 that you have a list of student names and emails.
 
 **Contents**
@@ -33,6 +33,9 @@ In Sakai, you'll need to download a `grades.csv` file. This can be found using
 the "Download All" link when you are in a submission page about to grade the
 assignments. This `grades.csv` file will be put with the flat directory as seen
 below.
+
+[Here](https://longsight.screenstepslive.com/s/sakai_help/m/59830/l/610136-how-do-i-upload-graded-assignment-submissions-and-feedback)
+are some more visual instructions on how to do this.
 
 ## Example Directory Structure
 
