@@ -142,18 +142,20 @@ if __name__ == '__main__':
     grades['folder_name'] = grades['Last Name'] + ', ' + \
         grades['First Name'] + '(' + grades['Display ID'] + ')'
 
-    graded_files = os.listdir(assignment_path)
+    student_files = os.listdir(assignment_path)
+    for student_file in student_files:
 
-    check_ipynb = re.compile(r'ipynb$')
-    for student_file in graded_files:
+        # Make sure we're only dealing with Jupyter notebook files
+        if re.search(r'ipynb$', student_file):
 
-        if check_ipynb.search(student_file):
-
+            # Make the student name from the file consistent with what we would
+            # expect from the downloaded Sakai grades file, i.e., capitalized
             student_name_search = re.search(r'^[A-Za-z]*', student_file)
             student_name = student_name_search.group().capitalize()
 
-            # Set student grade in grade data frame
-            student_grade = re.search(r'([0-9]{,3}).ipynb', student_file)
+            # Set student grade in grade data frame from the file name
+            # e.g., a_Assignment5_70.ipynb => 70
+            student_grade = re.search(r'([0-9]{,3}).ipynb$', student_file)
             student_idx = grades['Last Name'].str.contains(student_name)
             grades.loc[student_idx, 'grade'] = student_grade.group(1)
 
