@@ -66,46 +66,6 @@ from shutil import copy, make_archive
 import pandas as pd
 
 
-def check_path():
-    '''
-    Function to check command line input to be legitimate directory name
-
-    Args:
-        None
-
-    Returns:
-        String name of where assignment files are
-    '''
-    try:
-        assignment_path = sys.argv[1]
-    except IndexError:
-        path_error = """Append the directory with grades after the script name:
-        $ python format_feedback_for_sakai.py directory_with_grades"""
-        raise Exception(path_error)
-
-    return assignment_path
-
-
-def read_grades(assignment_path):
-    '''
-    Function to try reading in grades.csv file
-
-    Args:
-        assignment_path: String name of the path where grades.csv file is
-
-    Returns:
-        pandas DataFrame with student grade information
-    '''
-    try:
-        complete_grade_path = os.path.join(assignment_path, 'grades.csv')
-        grades = pd.read_csv(complete_grade_path)
-    except FileNotFoundError:
-        grade_error = 'Directory should contain a grades.csv file'
-        raise Exception(grade_error)
-
-    return grades
-
-
 def extract_and_write_comment(student_file_path, full_student_dir):
     '''
     Extract the first code block with comments and write out file
@@ -162,10 +122,20 @@ def archive_for_upload(assignment_path):
     make_archive(assignment_path, 'zip', output_filename)
 
 
-
 if __name__ == '__main__':
-    assignment_path = check_path()
-    grades = read_grades(assignment_path)
+    # Check first command line argument exists to use as assignment path
+    try:
+        assignment_path = sys.argv[1]
+    except IndexError:
+        path_error = """Append the directory with grades after the script name:
+        $ python format_feedback_for_sakai.py directory_with_grades"""
+        raise Exception(path_error)
+
+    try:
+        complete_grade_path = os.path.join(assignment_path, 'grades.csv')
+        grades = pd.read_csv(complete_grade_path)
+    except FileNotFoundError:
+        raise Exception('Directory should contain a grades.csv file')
 
     # Create column that'll be used to name the folders so it'll be formatted
     # as 'Last, First(email@address.edu)'
