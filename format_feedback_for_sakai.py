@@ -66,7 +66,7 @@ from shutil import copy, make_archive
 import pandas as pd
 
 
-def extract_and_write_comment(student_file_path, full_student_dir):
+def extract_and_write_comment(student_file_path, student_dir_path):
     '''
     Extract the first code block with comments and write out file
 
@@ -85,7 +85,7 @@ def extract_and_write_comment(student_file_path, full_student_dir):
         search_for_grade_comment = r'\([0-9]{,3}\/100\) (.*)<'
         comment = re.search(search_for_grade_comment, comment_raw)
 
-        comment_file_path = os.path.join(full_student_dir, 'comments.txt')
+        comment_file_path = os.path.join(student_dir_path, 'comments.txt')
         with open(comment_file_path, 'w') as com_fh:
             com_fh.write(comment.group(1))
 
@@ -104,32 +104,14 @@ def check_grades():
     pass
 
 
-def archive_for_upload(assignment_path):
-    '''
-    Archive files and directories ready for Sakai upload (WIP)
-
-    Looks through the assignment path for directories and the grades.csv file.
-    This function then takes these directories and file and zips it into a file
-    `upload_to_sakai.zip` that you can use to upload to Sakai.
-
-    Args:
-        assignment_path
-
-    Return:
-        None
-    '''
-    output_filename = os.path.join(assignment_path, 'upload_to_sakai.zip')
-    make_archive(assignment_path, 'zip', output_filename)
-
-
 if __name__ == '__main__':
-    # Check first command line argument exists to use as assignment path
+    # Check command line argument exists to use as assignment and out path
     try:
         assignment_path = sys.argv[1]
     except IndexError:
-        path_error = """Append the directory with grades after the script name:
-        $ python format_feedback_for_sakai.py directory_with_grades"""
-        raise Exception(path_error)
+        args_error = """Add grades and output folder after the script name:
+        $ python format_feedback_for_sakai.py grades_dir"""
+        raise Exception(args_error)
 
     try:
         complete_grade_path = os.path.join(assignment_path, 'grades.csv')
@@ -161,15 +143,16 @@ if __name__ == '__main__':
 
             # Create student submission directory for students
             student_dir = grades.loc[student_idx, 'folder_name'].values[0]
-            full_student_dir = os.path.join(assignment_path, student_dir)
-            if not os.path.exists(full_student_dir):
-                os.makedirs(full_student_dir)
+            student_dir_path = os.path.join(assignment_path, student_dir)
+            if not os.path.exists(student_dir_path):
+                os.makedirs(student_dir_path)
 
             student_file_path = os.path.join(assignment_path, student_file)
-            extract_and_write_comment(student_file_path, full_student_dir)
+            extract_and_write_comment(student_file_path, student_dir_path)
 
-            # Copy feedback file into 'Feedback Attachment(s)/'
-            feedback_dir = os.path.join(full_student_dir,
+            # I'd rather not move the original assignments to the student
+            # folders in case things don't work out; instead, we can copy them
+            feedback_dir = os.path.join(student_dir_path,
                                         'Feedback Attachment(s)')
             if not os.path.exists(feedback_dir):
                 os.makedirs(feedback_dir)
@@ -177,3 +160,7 @@ if __name__ == '__main__':
 
     grades_path = os.path.join(assignment_path, 'grades.csv')
     grades.to_csv(grades_path, sep=',', index=False)
+
+    # Make archive to zip and upload and go to Sakai
+    output_filename = os.path.join('upload_to_sakai')
+    make_archive(output_filename, 'zip', assignment_path)
